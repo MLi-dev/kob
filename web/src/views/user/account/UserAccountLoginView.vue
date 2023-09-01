@@ -1,0 +1,70 @@
+<template>
+    <ContentField>
+        <div class="row justify-content-md-center">
+            <div class="col-3">
+                <form>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" placeholder="Enter username"/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Enter password"/>
+                    </div>
+                    <div class="error-message"></div>
+                    <button type="button" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </ContentField>
+</template>
+
+<script>
+import ContentField from '../../../components/ContentField.vue'
+import { useStore } from 'vuex'
+import { ref } from 'vue'
+import router from '../../../router/index'
+
+
+export default {
+    components: {
+        ContentField
+    }, 
+    setup() {
+        const store = useStore();
+        let username = ref('');
+        let password = ref('');
+        let error_message = ref('');
+
+        const login = () => {
+            error_message.value = "";
+            store.dispatch("login", {
+                username: username.value,
+                password: password.value,
+                success() {
+                    store.dispatch("getinfo", {
+                        success() {
+                            router.push({ name: 'home' });
+                            console.log(store.state.user);
+                        }
+                    })
+                },
+                error() {
+                    error_message.value = "Invalid login";
+                }
+            })
+        }
+
+        return {
+            username,
+            password,
+            error_message,
+            login,
+        }
+    }
+
+}
+</script>
+
+<style scoped>
+</style>

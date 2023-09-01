@@ -25,10 +25,23 @@
                 <router-link class="dropdown-item" :to="{name: 'user_bot_index'}">My Profile</router-link>
             </li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Sign out</a></li>
+            <li><a class="dropdown-item" href="#" @click="logout">Sign out</a></li>
           </ul>
         </li>
       </ul>
+      <!-- <ul class="navbar-nav" v-else>
+        <li class="nav-item">
+          <router-link class="nav-link" :to="{name: 'user_account_login' }" role="button">
+            Login
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link" :to="{name: 'user_account_register'}" role="button">
+            Register
+          </router-link>
+        </li>
+      </ul> -->
+
     </div>
   </div>
 </nav>
@@ -37,13 +50,20 @@
 <script>
 import {useRoute} from 'vue-router'
 import {computed} from 'vue' 
+import {useStore} from 'vuex'
 
 export default {    
     setup() {
+    const store=useStore(); 
     const route = useRoute(); 
     let route_name=computed(()=>route.name)
+
+    const logout=()=>{
+      store.dispatch("logout");
+    }
     return {
-        route_name
+        route_name,
+        logout
     }
     }
 }
