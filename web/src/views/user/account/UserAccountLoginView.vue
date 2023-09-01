@@ -2,17 +2,17 @@
     <ContentField>
         <div class="row justify-content-md-center">
             <div class="col-3">
-                <form>
+                <form @submit.prevent="login">
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="username" placeholder="Enter username"/>
+                        <input v-model="username" type="text" class="form-control" id="username" placeholder="Enter username"/>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Enter password"/>
+                        <input v-model="password" type="password" class="form-control" id="password" placeholder="Enter password"/>
                     </div>
                     <div class="error-message"></div>
-                    <button type="button" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
         </div>

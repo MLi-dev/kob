@@ -14,10 +14,10 @@
           <router-link :class="route_name == 'ranklist_index' ? 'nav-link active' : 'nav-link'" :to="{name: 'ranklist_index'}">Rankings</router-link>
         </li>
       </ul>
-      <ul class="navbar-nav">
+      <ul class="navbar-nav" v-if="$store.state.user.is_login">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            yanxuecan
+            {{$store.state.user.username}}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li>
@@ -29,7 +29,7 @@
           </ul>
         </li>
       </ul>
-      <!-- <ul class="navbar-nav" v-else>
+      <ul class="navbar-nav" v-else>
         <li class="nav-item">
           <router-link class="nav-link" :to="{name: 'user_account_login' }" role="button">
             Login
@@ -40,7 +40,7 @@
             Register
           </router-link>
         </li>
-      </ul> -->
+      </ul>
 
     </div>
   </div>
