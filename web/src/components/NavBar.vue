@@ -22,7 +22,7 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li>
 
-                <router-link class="dropdown-item" :to="{name: 'user_bot_index'}">My Profile</router-link>
+                <router-link class="dropdown-item" :to="{name: 'user_bot_index'}">My Bots</router-link>
             </li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#" @click="logout">Sign out</a></li>

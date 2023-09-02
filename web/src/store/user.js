@@ -54,7 +54,7 @@ export default {
 				},
 			});
 		},
-		getinfo(context, data) {
+		getInfo(context, data) {
 			$.ajax({
 				url: "http://127.0.0.1:3000/user/account/info/",
 				type: "get",
