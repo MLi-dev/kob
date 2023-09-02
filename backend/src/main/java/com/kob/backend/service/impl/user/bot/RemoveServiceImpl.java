@@ -34,7 +34,7 @@ public class RemoveServiceImpl implements RemoveService {
             return map;
         }
         if(!bot.getUserId().equals(user.getId())) {
-            map.put("error_message", "Ids do not match");
+            map.put("error_message", "You have no permission to delete this bot!");
             return map;
         }
 
