@@ -5,17 +5,13 @@
     <groupId>com.kob</groupId>
     <artifactId>backendcloud</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-<!--    <modules>-->
-<!--        <module>matchingsystem</module>-->
-<!--        <module>backend</module>-->
-<!--    </modules>-->
-    <name>backendcloud</name>
-    <description>backendcloud</description>
     <modules>
         <module>matchingsystem</module>
         <module>backend</module>
         <module>botrunningsystem</module>
     </modules>
+    <name>backendcloud</name>
+    <description>backendcloud</description>
     <packaging>pom</packaging>
 
     <properties>
