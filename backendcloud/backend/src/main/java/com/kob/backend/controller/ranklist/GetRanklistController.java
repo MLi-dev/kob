@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
+
 @RestController
 public class GetRanklistController {
     @Autowired
@@ -15,7 +16,7 @@ public class GetRanklistController {
 
     @GetMapping("/api/ranklist/getlist/")
     public JSONObject getList(@RequestParam Map<String, String> data) {
-        Integer page=Integer.parseInt(data.get("page"));
+        Integer page = Integer.parseInt(data.get("page"));
         return getRanklistService.getList(page);
     }
 }

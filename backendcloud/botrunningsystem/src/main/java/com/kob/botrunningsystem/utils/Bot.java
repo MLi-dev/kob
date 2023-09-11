@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Bot implements java.util.function.Supplier<Integer>{
+public class Bot implements java.util.function.Supplier<Integer> {
     static class Cell {
         public int x, y;
         public Cell(int x, int y) {
@@ -15,7 +15,7 @@ public class Bot implements java.util.function.Supplier<Integer>{
         }
     }
 
-    private boolean check_tail_increasing(int step) {  // 检验当前回合，蛇的长度是否增加
+    private boolean check_tail_increasing(int step) {
         if (step <= 10) return true;
         return step % 3 == 1;
     }
@@ -71,6 +71,7 @@ public class Bot implements java.util.function.Supplier<Integer>{
 
         return 0;
     }
+
     @Override
     public Integer get() {
         File file = new File("input.txt");

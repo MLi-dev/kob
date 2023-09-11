@@ -1,4 +1,5 @@
 package com.kob.backend.controller.user.bot;
+
 import com.kob.backend.pojo.Bot;
 import com.kob.backend.service.user.bot.GetListService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ public class GetListController {
     @Autowired
     private GetListService getListService;
 
-    @GetMapping("/api/user/bot/getList/")
+    @GetMapping("/api/user/bot/getlist/")
     public List<Bot> getList() {
         return getListService.getList();
     }

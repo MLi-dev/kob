@@ -25,6 +25,6 @@ public class Record {
     private String bSteps;
     private String map;
     private String loser;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Shanghai")
     private Date createtime;
 }
