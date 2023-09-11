@@ -5,10 +5,10 @@ import java.util.Queue;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class BotPool extends Thread{
+public class BotPool extends Thread {
     private final ReentrantLock lock = new ReentrantLock();
     private final Condition condition = lock.newCondition();
-    private final Queue<Bot> bots=new LinkedList<>();
+    private final Queue<Bot> bots = new LinkedList<>();
 
     public void addBot(Integer userId, String botCode, String input) {
         lock.lock();
@@ -19,17 +19,17 @@ public class BotPool extends Thread{
             lock.unlock();
         }
     }
-    private void consume(Bot bot) {
-        Consumer consumer=new Consumer();
-        consumer.startTimeout(2000, bot);
 
+    private void consume(Bot bot) {
+        Consumer consumer = new Consumer();
+        consumer.startTimeout(2000, bot);
     }
 
     @Override
     public void run() {
-        while(true) {
+        while (true) {
             lock.lock();
-            if(bots.isEmpty()) {
+            if (bots.isEmpty()) {
                 try {
                     condition.await();
                 } catch (InterruptedException e) {
@@ -45,4 +45,3 @@ public class BotPool extends Thread{
         }
     }
 }
-

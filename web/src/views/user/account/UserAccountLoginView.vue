@@ -1,86 +1,115 @@
 <template>
-    <ContentField v-if="!$store.state.user.pulling_info">
-        <div class="row justify-content-md-center">
-            <div class="col-3">
-                <form @submit.prevent="login">
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
-                        <input v-model="username" type="text" class="form-control" id="username" placeholder="Enter username"/>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input v-model="password" type="password" class="form-control" id="password" placeholder="Enter password"/>
-                    </div>
-                    <div class="error-message"></div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-        </div>
-    </ContentField>
+  <ContentField v-if="!$store.state.user.pulling_info">
+    <div class="row justify-content-md-center">
+      <div class="col-3">
+        <form @submit.prevent="login">
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input
+              v-model="username"
+              type="text"
+              class="form-control"
+              id="username"
+              placeholder="Username"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input
+              v-model="password"
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="Password"
+            />
+          </div>
+          <div class="error-message">{{ error_message }}</div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </ContentField>
 </template>
 
 <script>
-import ContentField from '../../../components/ContentField.vue'
-import { useStore } from 'vuex'
-import { ref } from 'vue'
-import router from '../../../router/index'
-
+import ContentField from "../../../components/ContentField.vue";
+import { useStore } from "vuex";
+import { ref } from "vue";
+import router from "../../../router/index";
+import $ from "jquery";
 
 export default {
-    components: {
-        ContentField
-    }, 
-    setup() {
-        const store = useStore();
-        let username = ref('');
-        let password = ref('');
-        let error_message = ref('');
+  components: {
+    ContentField,
+  },
+  setup() {
+    const store = useStore();
+    let username = ref("");
+    let password = ref("");
+    let error_message = ref("");
 
-        const jwt_token=localStorage.getItem("jwt_token"); 
-        if(jwt_token) {
-            store.commit("updateToken", jwt_token); 
-            store.dispatch("getInfo", {
-                success() {
-                    router.push({name: "home"}); 
-                    store.commit("updatePullingInfo", false); 
-                }, 
-                error() {
-                    store.commit("updatePullingInfo", false); 
-                }
-            })
-        } else {
-            store.commit("updatePullingInfo", false); 
-        }
-
-        const login = () => {
-            error_message.value = "";
-            store.dispatch("login", {
-                username: username.value,
-                password: password.value,
-                success() {
-                    store.dispatch("getinfo", {
-                        success() {
-                            router.push({ name: 'home' });
-                            console.log(store.state.user);
-                        }
-                    })
-                },
-                error() {
-                    error_message.value = "Invalid login";
-                }
-            })
-        }
-
-        return {
-            username,
-            password,
-            error_message,
-            login,
-        }
+    const jwt_token = localStorage.getItem("jwt_token");
+    if (jwt_token) {
+      store.commit("updateToken", jwt_token);
+      store.dispatch("getinfo", {
+        success() {
+          router.push({ name: "home" });
+          store.commit("updatePullingInfo", false);
+        },
+        error() {
+          store.commit("updatePullingInfo", false);
+        },
+      });
+    } else {
+      store.commit("updatePullingInfo", false);
     }
 
-}
+    const login = () => {
+      error_message.value = "";
+      store.dispatch("login", {
+        username: username.value,
+        password: password.value,
+        success() {
+          store.dispatch("getinfo", {
+            success() {
+              router.push({ name: "home" });
+            },
+          });
+        },
+        error() {
+          error_message.value = "Username or password incorrect!";
+        },
+      });
+    };
+
+    const acwing_login = () => {
+      $.ajax({
+        url: "https://app5604.acapp.acwing.com.cn/api/user/account/acwing/web/apply_code/",
+        type: "GET",
+        success: (resp) => {
+          if (resp.result === "success") {
+            window.location.replace(resp.apply_code_url);
+          }
+        },
+      });
+    };
+
+    return {
+      username,
+      password,
+      error_message,
+      login,
+      acwing_login,
+    };
+  },
+};
 </script>
 
 <style scoped>
+button {
+  width: 100%;
+}
+div.error-message {
+  color: red;
+}
 </style>
