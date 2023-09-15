@@ -102,7 +102,7 @@ export default {
     const pull_page = (page) => {
       current_page = page;
       $.ajax({
-        url: "https://app5604.acapp.acwing.com.cn/api/record/getlist/",
+        url: `${process.env.VUE_APP_HOST}/api/record/getlist/`,
         data: {
           page,
         },

@@ -77,7 +77,7 @@ export default {
 
     const refresh_bots = () => {
       $.ajax({
-        url: "https://app5604.acapp.acwing.com.cn/api/user/bot/getlist/",
+        url: `${process.env.VUE_APP_HOST}/api/user/bot/getlist/`,
         type: "get",
         headers: {
           Authorization: "Bearer " + store.state.user.token,
