@@ -84,7 +84,7 @@ export default {
 
     const acwing_login = () => {
       $.ajax({
-        url: "https://app5604.acapp.acwing.com.cn/api/user/account/acwing/web/apply_code/",
+        url: `${process.env.VUE_APP_HOST}/api/user/account/acwing/web/apply_code/`,
         type: "GET",
         success: (resp) => {
           if (resp.result === "success") {

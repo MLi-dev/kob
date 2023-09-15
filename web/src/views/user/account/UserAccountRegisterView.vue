@@ -61,7 +61,7 @@ export default {
 
     const register = () => {
       $.ajax({
-        url: "https://app5604.acapp.acwing.com.cn/api/user/account/register/",
+        url: `${process.env.VUE_APP_HOST}/api/user/account/register/`,
         type: "post",
         data: {
           username: username.value,
